@@ -13,8 +13,8 @@ const authOption: NextAuthOptions = {
   },
   providers: [
     AzureADProvider({
-        clientId: process?.env?.AZURE_AD_CLIENT_ID!,
-        clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
+        clientId: process?.env?.AZURE_AD_CLIENT_ID || '7bfae016-55fd-4757-9d6f-c185eb591a1e',
+        clientSecret: process.env.AZURE_AD_CLIENT_SECRET || 'Gmk8Q~6rFElEuQC-VhJEtqyzK0brf8vAN-.PkdtS',
         authorization: { params: { scope: "openid profile User.Read Mail.Read Calendars.Read Contacts.Read Calendars.ReadWrite Files.Read.All Files.ReadWrite Files.ReadWrite.All" } }
     }),
   ],
