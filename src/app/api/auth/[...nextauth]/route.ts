@@ -8,7 +8,9 @@ const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!
 
 const authOption: NextAuthOptions = {
-    
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     AzureADProvider({
         clientId: process?.env?.AZURE_AD_CLIENT_ID!,
@@ -25,30 +27,18 @@ const authOption: NextAuthOptions = {
 
       return true
     },
-    async jwt({ token, user, account }) {
-        if (account && user) {
-          return {
-            accessToken: account.id_token,
-            accessTokenExpires: account?.expires_at
-              ? account.expires_at * 1000
-              : 0,
-            refreshToken: account.refresh_token,
-            user,
-          };
+    session,
+    async jwt({ token, user, account, profile }) {
+      if (profile) {
+       
+        if (!profile) {
+          throw new Error('No user found')
         }
-  
-        if (Date.now() < token.accessTokenExpires - 100000 || 0) {
-          return token;
-        }
-      },
-      async session({ session, token }) {
-        if (session) {
-          session.user = token.user;
-          session.error = token.error;
-          session.accessToken = token.accessToken;
-        }
-        return session;
-      },
+        token.profile = profile
+        token.account = account
+      }
+      return token
+    },
   },
 }
 
