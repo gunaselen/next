@@ -11,7 +11,7 @@ export const useRefreshToken = () => {
     const res = await axios.post("/token_refresh/", {
       refresh: session,
       headers: { 
-        'Authorization': `Bearer ${session?.user?.account?.access_token}`
+        'Authorization': `Bearer ${session?.user}`
       },
     });
 

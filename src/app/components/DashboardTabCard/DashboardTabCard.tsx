@@ -38,7 +38,7 @@ export default function DashboardTabCard(props: any) {
 
     const fetchData = async () => {
       const response = await axiosAuth.post('/get_employee_details/', requestOptions);
-      const data = response.data;
+      const data =  response.data;
       setData(data);
       console.log(data);
     };

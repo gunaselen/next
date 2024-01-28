@@ -14,7 +14,7 @@ const useAxiosAuth = () => {
     const requestIntercept = axiosAuth.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${session?.user?.account?.access_token}`;
+          config.headers["Authorization"] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkZW50aWZpZXIiOiJhbGlzb25faG9sZW5AbW9oYXdraW5kLmNvbSIsImV4cCI6MTcwODgzMjg4MywiaWF0IjoxNzA2MjQwODgzLjg2MTgxMywiZW1haWwiOiJhbGlzb25faG9sZW5AbW9oYXdraW5kLmNvbSIsImVtcGxveWVlX2lkIjoiMTQ4OSIsImJ1c2luZXNzX3BhcnRuZXJfaWQiOiI4MDAwMDAxNDU3IiwidmVyc2lvbl9udW1iZXIiOiIxIn0.J-y9tG0e4bSY7cO3u-DR2WVzLdLpiw29PzI1kwmV8zk`;
         }
         return config;
       },
@@ -28,7 +28,7 @@ const useAxiosAuth = () => {
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           prevRequest.sent = true;
           await refreshToken();
-          prevRequest.headers["Authorization"] = `Bearer ${response.access_token}`;
+          prevRequest.headers["Authorization"] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkZW50aWZpZXIiOiJhbGlzb25faG9sZW5AbW9oYXdraW5kLmNvbSIsImV4cCI6MTcwODgzMjg4MywiaWF0IjoxNzA2MjQwODgzLjg2MTgxMywiZW1haWwiOiJhbGlzb25faG9sZW5AbW9oYXdraW5kLmNvbSIsImVtcGxveWVlX2lkIjoiMTQ4OSIsImJ1c2luZXNzX3BhcnRuZXJfaWQiOiI4MDAwMDAxNDU3IiwidmVyc2lvbl9udW1iZXIiOiIxIn0.J-y9tG0e4bSY7cO3u-DR2WVzLdLpiw29PzI1kwmV8zk`;
           return axiosAuth(prevRequest);
         }
         return Promise.reject(error);
