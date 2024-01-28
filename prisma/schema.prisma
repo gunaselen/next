@@ -1,0 +1,1269 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model aes_full_details {
+  ID                             String  @id @db.VarChar(10)
+  AE_Account_Code                String? @db.VarChar(70)
+  First_name                     String? @db.VarChar(255)
+  Last_name                      String? @db.VarChar(255)
+  Email_address                  String? @db.VarChar(254)
+  Picture_location               String? @db.VarChar(200)
+  Country_Code                   String? @db.VarChar(10)
+  phone_no_parentheses_no_spaces String? @db.VarChar(70)
+  International_Y_N              String? @db.VarChar(10)
+  Canada_Y_N                     String? @db.VarChar(10)
+  Hospitality_Y_N                String? @db.VarChar(10)
+  Ed_Gov_Y_N                     String? @db.VarChar(10)
+  HC_SL_Y_N                      String? @db.VarChar(10)
+  HealthCare_Y_N                 String? @db.VarChar(10)
+  SeniorLiving_Y_N               String? @db.VarChar(10)
+  WP_RT_Y_N                      String? @db.VarChar(10)
+  Region                         String? @db.VarChar(255)
+  Territory                      String? @db.VarChar(255)
+  District                       String? @db.VarChar(255)
+  District2                      String? @db.VarChar(255)
+  TM                             String? @db.VarChar(255)
+  AE_Y_N                         String? @db.VarChar(10)
+  Agent_Y_N                      String? @db.VarChar(10)
+  Sub_agent_Y_N                  String? @db.VarChar(10)
+  SAM_Y_N                        String? @db.VarChar(10)
+  Agent_if_sub_agent             String? @db.VarChar(255)
+  SME                            String? @db.VarChar(255)
+  RVP                            String? @db.VarChar(255)
+  SVP                            String? @db.VarChar(255)
+  EID                            String? @db.VarChar(255)
+  SC                             String? @db.VarChar(255)
+  PM                             String? @db.VarChar(255)
+
+  @@index([ID], map: "aes_full_details_ID_92130de8_like")
+}
+
+model aes_zip_code {
+  Id                         Int       @id @default(autoincrement())
+  EmployeeID                 String?   @db.VarChar(20)
+  ZipCode                    String?   @db.VarChar(10)
+  District                   String?   @db.VarChar(70)
+  AEAccountCode              String?   @db.VarChar(70)
+  FirstName                  String?   @db.VarChar(255)
+  LastName                   String?   @db.VarChar(255)
+  EmailAddress               String?   @db.VarChar(254)
+  PhoneNoParenthesesNoSpaces String?   @db.VarChar(70)
+  CreatedOn                  DateTime  @db.Timestamptz(6)
+  ChangedOn                  DateTime  @db.Timestamptz(6)
+  EntityLastChangedOn        DateTime? @db.Timestamptz(6)
+}
+
+model api_call_history {
+  id                     Int      @id @default(autoincrement())
+  last_changed_date_time DateTime @db.Timestamptz(6)
+  data_type              String   @db.VarChar(100)
+}
+
+model appointment_attachment {
+  Id                        Int      @id @default(autoincrement())
+  AppointmentID             String   @db.VarChar(255)
+  EmployeeID                String   @db.VarChar(255)
+  CreatedOn                 DateTime @db.Timestamptz(6)
+  LastUpdatedOn             DateTime @db.Timestamptz(6)
+  CreatedBy                 String?  @db.VarChar(255)
+  LastUpdatedBy             String?  @db.VarChar(255)
+  AppointmentAttachmentLink String?  @db.VarChar(5096)
+  AttachmentId              String?  @db.VarChar(255)
+  AttachmentName            String?  @db.VarChar(255)
+  DownloadUrl               String?  @db.VarChar(5096)
+  AttachmentSize            String?  @db.VarChar(255)
+}
+
+model appointment_availability_code {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_availability_code_Code_5fc0ec91_like")
+}
+
+model appointment_category {
+  Code         String         @id @db.VarChar(10)
+  Context      String         @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_category_Code_0ed30be5_like")
+}
+
+model appointment_collaboration_channel_code {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_collaboration_channel_code_Code_91c03651_like")
+}
+
+model appointment_created_by_ssi {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_created_by_ssi_Code_4437a5a7_like")
+}
+
+model appointment_data_origin_type_code {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_data_origin_type_code_Code_5a527a8f_like")
+}
+
+model appointment_distribution_channel {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_distribution_channel_Code_f0a75947_like")
+}
+
+model appointment_division {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_division_Code_9b5e4ac4_like")
+}
+
+model appointment_document_type {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_document_type_Code_29aca2b9_like")
+}
+
+model appointment_information_sensitivity_code {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_information_sensitivity_code_Code_280f0a9c_like")
+}
+
+model appointment_life_cycle_status_code {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_life_cycle_status_code_Code_0ff2ddd1_like")
+}
+
+model appointment_priority {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_priority_Code_dd72873c_like")
+}
+
+model appointment_start_datetime_zone_code {
+  Code                                                                                     String         @id @db.VarChar(10)
+  Description                                                                              String         @db.VarChar(255)
+  appointments_appointments_EnddatetimeZoneCode_idToappointment_start_datetime_zone_code   appointments[] @relation("appointments_EnddatetimeZoneCode_idToappointment_start_datetime_zone_code")
+  appointments_appointments_StartDatetimeZoneCode_idToappointment_start_datetime_zone_code appointments[] @relation("appointments_StartDatetimeZoneCode_idToappointment_start_datetime_zone_code")
+
+  @@index([Code], map: "appointment_start_datetime_zone_code_Code_0f075e0b_like")
+}
+
+model appointment_visit_type_code {
+  Code         String         @id @db.VarChar(10)
+  Description  String         @db.VarChar(255)
+  appointments appointments[]
+
+  @@index([Code], map: "appointment_visit_type_code_Code_d33760ab_like")
+}
+
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model appointments {
+  ObjectID                                                                                                         String                                    @id @db.VarChar(255)
+  ID                                                                                                               String?                                   @db.VarChar(10)
+  Subject                                                                                                          String?                                   @db.VarChar(255)
+  StartDate                                                                                                        DateTime?                                 @db.Timestamptz(6)
+  EndDate                                                                                                          DateTime?                                 @db.Timestamptz(6)
+  OrganizerUUID                                                                                                    String?                                   @db.VarChar(255)
+  OrganizerPartyID                                                                                                 String?                                   @db.VarChar(255)
+  Owner                                                                                                            String?                                   @db.VarChar(255)
+  PrimaryContact                                                                                                   String?                                   @db.VarChar(255)
+  OwnerPartyID                                                                                                     String?                                   @db.VarChar(255)
+  FullDayIndicator                                                                                                 Boolean
+  Account                                                                                                          String?                                   @db.VarChar(255)
+  MainAccountPartyID                                                                                               String?                                   @db.VarChar(255)
+  MainContactPartyID                                                                                               String?                                   @db.VarChar(255)
+  Location                                                                                                         String?
+  SalesTerritoryUUID                                                                                               String?                                   @db.VarChar(255)
+  SalesTerritoryID                                                                                                 String?                                   @db.VarChar(255)
+  SalesTerritoryName                                                                                               String?                                   @db.VarChar(255)
+  SalesOrganisation                                                                                                String?                                   @db.VarChar(255)
+  VisitTourPlanUUID                                                                                                String?                                   @db.VarChar(255)
+  AccountName                                                                                                      String?                                   @db.VarChar(255)
+  AdditionalLocationName                                                                                           String?                                   @db.VarChar(255)
+  ChangedBy                                                                                                        String?                                   @db.VarChar(255)
+  CompletionPercent                                                                                                Decimal                                   @db.Decimal(10, 2)
+  CreatedBy                                                                                                        String?                                   @db.VarChar(255)
+  CreatedOn                                                                                                        DateTime                                  @db.Timestamptz(6)
+  GroupwareItemID                                                                                                  String?                                   @db.VarChar(255)
+  OrganizerEmailURI                                                                                                String                                    @db.VarChar(254)
+  OrganizerName                                                                                                    String?                                   @db.VarChar(255)
+  OrganizerPartyName                                                                                               String?                                   @db.VarChar(255)
+  OwnerName                                                                                                        String?                                   @db.VarChar(255)
+  Phone                                                                                                            String?                                   @db.VarChar(255)
+  PrimaryContactName                                                                                               String?                                   @db.VarChar(255)
+  ReportedDateTime                                                                                                 DateTime                                  @db.Timestamptz(6)
+  UUID                                                                                                             String?                                   @db.VarChar(255)
+  LastChangeDateTime                                                                                               DateTime                                  @db.Timestamptz(6)
+  EntityLastChangedOn                                                                                              DateTime                                  @db.Timestamptz(6)
+  ETag                                                                                                             DateTime?                                 @db.Timestamptz(6)
+  OccurrenceDate                                                                                                   DateTime?                                 @db.Timestamptz(6)
+  RecurrenceActGroupwareID                                                                                         String?                                   @db.VarChar(255)
+  RecurringBusinessActivityNodeID                                                                                  String?                                   @db.VarChar(255)
+  CollaborationURL                                                                                                 String                                    @db.VarChar(500)
+  Draft                                                                                                            Boolean
+  CloseDate_KUT                                                                                                    DateTime?                                 @db.Timestamptz(6)
+  MyRVPHasApprovedThisRequest_KUT                                                                                  Boolean
+  VisitSurvey_KUT                                                                                                  String?                                   @db.VarChar(255)
+  AvailabilityCode_id                                                                                              String?                                   @db.VarChar(10)
+  Category_id                                                                                                      String?                                   @db.VarChar(10)
+  CollaborationChannelCode_id                                                                                      String?                                   @db.VarChar(10)
+  CreatedBySSI_id                                                                                                  String?                                   @db.VarChar(10)
+  DataOriginTypeCode_id                                                                                            String?                                   @db.VarChar(10)
+  DistributionChannel_id                                                                                           String?                                   @db.VarChar(10)
+  Division_id                                                                                                      String?                                   @db.VarChar(10)
+  DocumentType_id                                                                                                  String?                                   @db.VarChar(10)
+  EnddatetimeZoneCode_id                                                                                           String?                                   @db.VarChar(10)
+  InformationSensitivityCode_id                                                                                    String?                                   @db.VarChar(10)
+  LifeCycleStatusCode_id                                                                                           String?                                   @db.VarChar(10)
+  Priority_id                                                                                                      String?                                   @db.VarChar(10)
+  StartDatetimeZoneCode_id                                                                                         String?                                   @db.VarChar(10)
+  VisitTypeCode_id                                                                                                 String?                                   @db.VarChar(10)
+  appointment_availability_code                                                                                    appointment_availability_code?            @relation(fields: [AvailabilityCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_AvailabilityCode_id_527321d5_fk_appointme")
+  appointment_category                                                                                             appointment_category?                     @relation(fields: [Category_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_Category_id_9e7834b6_fk_appointment_category_Code")
+  appointment_collaboration_channel_code                                                                           appointment_collaboration_channel_code?   @relation(fields: [CollaborationChannelCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_CollaborationChannel_21ab8b6b_fk_appointme")
+  appointment_created_by_ssi                                                                                       appointment_created_by_ssi?               @relation(fields: [CreatedBySSI_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_CreatedBySSI_id_f7578e44_fk_appointme")
+  appointment_data_origin_type_code                                                                                appointment_data_origin_type_code?        @relation(fields: [DataOriginTypeCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_DataOriginTypeCode_i_b42bea5f_fk_appointme")
+  appointment_distribution_channel                                                                                 appointment_distribution_channel?         @relation(fields: [DistributionChannel_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_DistributionChannel__38674e31_fk_appointme")
+  appointment_division                                                                                             appointment_division?                     @relation(fields: [Division_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_Division_id_d719abc2_fk_appointment_division_Code")
+  appointment_document_type                                                                                        appointment_document_type?                @relation(fields: [DocumentType_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_DocumentType_id_1eae10f5_fk_appointme")
+  appointment_start_datetime_zone_code_appointments_EnddatetimeZoneCode_idToappointment_start_datetime_zone_code   appointment_start_datetime_zone_code?     @relation("appointments_EnddatetimeZoneCode_idToappointment_start_datetime_zone_code", fields: [EnddatetimeZoneCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_EnddatetimeZoneCode__a795b4d2_fk_appointme")
+  appointment_information_sensitivity_code                                                                         appointment_information_sensitivity_code? @relation(fields: [InformationSensitivityCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_InformationSensitivi_46b6c02d_fk_appointme")
+  appointment_life_cycle_status_code                                                                               appointment_life_cycle_status_code?       @relation(fields: [LifeCycleStatusCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_LifeCycleStatusCode__b5d7eb18_fk_appointme")
+  appointment_priority                                                                                             appointment_priority?                     @relation(fields: [Priority_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_Priority_id_540fe008_fk_appointment_priority_Code")
+  appointment_start_datetime_zone_code_appointments_StartDatetimeZoneCode_idToappointment_start_datetime_zone_code appointment_start_datetime_zone_code?     @relation("appointments_StartDatetimeZoneCode_idToappointment_start_datetime_zone_code", fields: [StartDatetimeZoneCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_StartDatetimeZoneCod_f662d4ce_fk_appointme")
+  appointment_visit_type_code                                                                                      appointment_visit_type_code?              @relation(fields: [VisitTypeCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "appointments_VisitTypeCode_id_7d0bfa7e_fk_appointme")
+
+  @@index([AvailabilityCode_id], map: "appointments_AvailabilityCode_id_527321d5")
+  @@index([AvailabilityCode_id], map: "appointments_AvailabilityCode_id_527321d5_like")
+  @@index([Category_id], map: "appointments_Category_id_9e7834b6")
+  @@index([Category_id], map: "appointments_Category_id_9e7834b6_like")
+  @@index([CollaborationChannelCode_id], map: "appointments_CollaborationChannelCode_id_21ab8b6b")
+  @@index([CollaborationChannelCode_id], map: "appointments_CollaborationChannelCode_id_21ab8b6b_like")
+  @@index([CreatedBySSI_id], map: "appointments_CreatedBySSI_id_f7578e44")
+  @@index([CreatedBySSI_id], map: "appointments_CreatedBySSI_id_f7578e44_like")
+  @@index([DataOriginTypeCode_id], map: "appointments_DataOriginTypeCode_id_b42bea5f")
+  @@index([DataOriginTypeCode_id], map: "appointments_DataOriginTypeCode_id_b42bea5f_like")
+  @@index([DistributionChannel_id], map: "appointments_DistributionChannel_id_38674e31")
+  @@index([DistributionChannel_id], map: "appointments_DistributionChannel_id_38674e31_like")
+  @@index([Division_id], map: "appointments_Division_id_d719abc2")
+  @@index([Division_id], map: "appointments_Division_id_d719abc2_like")
+  @@index([DocumentType_id], map: "appointments_DocumentType_id_1eae10f5")
+  @@index([DocumentType_id], map: "appointments_DocumentType_id_1eae10f5_like")
+  @@index([EnddatetimeZoneCode_id], map: "appointments_EnddatetimeZoneCode_id_a795b4d2")
+  @@index([EnddatetimeZoneCode_id], map: "appointments_EnddatetimeZoneCode_id_a795b4d2_like")
+  @@index([InformationSensitivityCode_id], map: "appointments_InformationSensitivityCode_id_46b6c02d")
+  @@index([InformationSensitivityCode_id], map: "appointments_InformationSensitivityCode_id_46b6c02d_like")
+  @@index([LifeCycleStatusCode_id], map: "appointments_LifeCycleStatusCode_id_b5d7eb18")
+  @@index([LifeCycleStatusCode_id], map: "appointments_LifeCycleStatusCode_id_b5d7eb18_like")
+  @@index([ObjectID], map: "appointments_ObjectID_4c6168cd_like")
+  @@index([Priority_id], map: "appointments_Priority_id_540fe008")
+  @@index([Priority_id], map: "appointments_Priority_id_540fe008_like")
+  @@index([StartDatetimeZoneCode_id], map: "appointments_StartDatetimeZoneCode_id_f662d4ce")
+  @@index([StartDatetimeZoneCode_id], map: "appointments_StartDatetimeZoneCode_id_f662d4ce_like")
+  @@index([VisitTypeCode_id], map: "appointments_VisitTypeCode_id_7d0bfa7e")
+  @@index([VisitTypeCode_id], map: "appointments_VisitTypeCode_id_7d0bfa7e_like")
+}
+
+model auth_group {
+  id                     Int                      @id @default(autoincrement())
+  name                   String                   @unique @db.VarChar(150)
+  auth_group_permissions auth_group_permissions[]
+  custom_user_groups     custom_user_groups[]
+
+  @@index([name], map: "auth_group_name_a6ea08ec_like")
+}
+
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model auth_group_permissions {
+  id              BigInt          @id @default(autoincrement())
+  group_id        Int
+  permission_id   Int
+  auth_permission auth_permission @relation(fields: [permission_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "auth_group_permissio_permission_id_84c5c92e_fk_auth_perm")
+  auth_group      auth_group      @relation(fields: [group_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "auth_group_permissions_group_id_b120cbf9_fk_auth_group_id")
+
+  @@unique([group_id, permission_id], map: "auth_group_permissions_group_id_permission_id_0cd325b0_uniq")
+  @@index([group_id], map: "auth_group_permissions_group_id_b120cbf9")
+  @@index([permission_id], map: "auth_group_permissions_permission_id_84c5c92e")
+}
+
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model auth_permission {
+  id                           Int                            @id @default(autoincrement())
+  name                         String                         @db.VarChar(255)
+  content_type_id              Int
+  codename                     String                         @db.VarChar(100)
+  auth_group_permissions       auth_group_permissions[]
+  django_content_type          django_content_type            @relation(fields: [content_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "auth_permission_content_type_id_2f476e4b_fk_django_co")
+  custom_user_user_permissions custom_user_user_permissions[]
+
+  @@unique([content_type_id, codename], map: "auth_permission_content_type_id_codename_01ab375a_uniq")
+  @@index([content_type_id], map: "auth_permission_content_type_id_2f476e4b")
+}
+
+model corporate_account {
+  ObjectID                                   String    @id @db.VarChar(70)
+  AccountID                                  String?   @db.VarChar(10)
+  UUID                                       String?   @db.VarChar(70)
+  ExternalID                                 String?   @db.VarChar(100)
+  ExternalSystem                             String?   @db.VarChar(100)
+  RoleCode                                   String?   @db.VarChar(10)
+  RoleCodeText                               String?   @db.VarChar(255)
+  LifeCycleStatusCode                        String?   @db.VarChar(10)
+  LifeCycleStatusCodeText                    String?   @db.VarChar(255)
+  CustomerABCClassificationCode              String?   @db.VarChar(10)
+  CustomerABCClassificationCodeText          String?   @db.VarChar(255)
+  BusinessPartnerFormattedName               String?
+  Name                                       String?   @db.VarChar(255)
+  AdditionalName                             String?   @db.VarChar(255)
+  CurrentDefaultAddressUUID                  String?   @db.VarChar(255)
+  FormattedPostalAddressDescription          String?
+  CountryCode                                String?   @db.VarChar(10)
+  CountryCodeText                            String?   @db.VarChar(255)
+  StateCode                                  String?   @db.VarChar(10)
+  StateCodeText                              String?   @db.VarChar(255)
+  Street                                     String?
+  District                                   String?   @db.VarChar(100)
+  City                                       String?   @db.VarChar(100)
+  StreetPostalCode                           String?   @db.VarChar(10)
+  TimeZoneCode                               String?   @db.VarChar(10)
+  TimeZoneCodeText                           String?   @db.VarChar(255)
+  Phone                                      String?   @db.VarChar(100)
+  NormalisedPhone                            String?   @db.VarChar(100)
+  Mobile                                     String?   @db.VarChar(100)
+  NormalisedMobile                           String?   @db.VarChar(100)
+  Fax                                        String?   @db.VarChar(100)
+  Email                                      String?   @db.VarChar(254)
+  WebSite                                    String?   @db.VarChar(1024)
+  LanguageCode                               String?   @db.VarChar(10)
+  LanguageCodeText                           String?   @db.VarChar(255)
+  OwnerID                                    String?   @db.VarChar(255)
+  OwnerUUID                                  String?   @db.VarChar(255)
+  ParentAccountID                            String?   @db.VarChar(255)
+  TopLevelAccountID                          String?   @db.VarChar(255)
+  CreationOn                                 DateTime? @db.Timestamptz(6)
+  CreatedBy                                  String?   @db.VarChar(255)
+  CreatedByIdentityUUID                      String?   @db.VarChar(255)
+  ChangedOn                                  DateTime? @db.Timestamptz(6)
+  ChangedBy                                  String?   @db.VarChar(255)
+  ChangedByIdentityUUID                      String?   @db.VarChar(255)
+  EntityLastChangedOn                        DateTime? @db.Timestamptz(6)
+  ETag                                       DateTime? @db.Timestamptz(6)
+  ZParentAcct_SDK                            String?   @db.VarChar(255)
+  ZCustID_SDK                                String?   @db.VarChar(255)
+  ZExtID_SDK                                 String?   @db.VarChar(255)
+  ZC4CInternalID_SDK                         String?   @db.VarChar(255)
+  ZGAN_SDK                                   String?   @db.VarChar(255)
+  ZSAN_SDK                                   String?   @db.VarChar(255)
+  ADClassificationTier1_KUT                  Boolean
+  AccountClassification_KUT                  String?   @db.VarChar(255)
+  AccountClassification_KUTText              String?   @db.VarChar(255)
+  CallFrequency_KUT                          String?   @db.VarChar(255)
+  CallFrequency_KUTText                      String?   @db.VarChar(255)
+  DurkanAccountID_KUT                        String?   @db.VarChar(255)
+  DurkanContactID_KUT                        String?   @db.VarChar(255)
+  EnterpriseAccount_KUT                      Boolean
+  GPOContract_KUT                            String?   @db.VarChar(255)
+  GPOContract_KUTText                        String?   @db.VarChar(255)
+  HideAccount_KUT                            String?   @db.VarChar(255)
+  HideAccount_KUTText                        String?   @db.VarChar(255)
+  LastYearRevenueContent_KUT                 Decimal   @db.Decimal(15, 6)
+  LastYearRevenuecurrencyCode_KUT            String?   @db.VarChar(255)
+  LastYearRevenuecurrencyCode_KUTText        String?   @db.VarChar(255)
+  MarketSegment_KUT                          String?   @db.VarChar(255)
+  MarketSegment_KUTText                      String?   @db.VarChar(255)
+  YTDRevenueContent_KUT                      Decimal   @db.Decimal(15, 6)
+  YTDRevenuecurrencyCode_KUT                 String?   @db.VarChar(255)
+  YTDRevenuecurrencyCode_KUTText             String?   @db.VarChar(255)
+  ZAccountFocus_KUT                          String?   @db.VarChar(255)
+  ZAccountFocus_KUTText                      String?   @db.VarChar(255)
+  ZAccountGeography_KUT                      String?   @db.VarChar(255)
+  ZAccountGeography_KUTText                  String?   @db.VarChar(255)
+  ZAccountMarketSegmentSubCategories_KUT     String?   @db.VarChar(255)
+  ZAccountMarketSegmentSubCategories_KUTText String?   @db.VarChar(255)
+  ZAccountValueContent_KUT                   Decimal   @db.Decimal(15, 6)
+  ZBusinessType_KUT                          String?   @db.VarChar(255)
+  ZBusinessType_KUTText                      String?   @db.VarChar(255)
+  ZChainNumber_KUT                           String?   @db.VarChar(255)
+
+  @@index([ObjectID], map: "corporate_account_ObjectID_a472fee4_like")
+}
+
+model custom_user {
+  id                           BigInt                         @id @default(autoincrement())
+  password                     String                         @db.VarChar(128)
+  last_login                   DateTime?                      @db.Timestamptz(6)
+  is_superuser                 Boolean
+  email                        String                         @unique @db.VarChar(255)
+  first_name                   String                         @db.VarChar(150)
+  last_name                    String                         @db.VarChar(150)
+  user_role                    String                         @db.VarChar(20)
+  account_code                 String?                        @db.VarChar(50)
+  phone_number                 String?                        @db.VarChar(20)
+  picture_location             String?                        @db.VarChar(500)
+  address_line1                String?                        @db.VarChar(255)
+  address_line2                String?                        @db.VarChar(255)
+  city                         String?                        @db.VarChar(100)
+  zip_code                     String?                        @db.VarChar(20)
+  district                     String?                        @db.VarChar(100)
+  region                       String?                        @db.VarChar(100)
+  territory                    String?                        @db.VarChar(100)
+  state                        String?                        @db.VarChar(100)
+  country                      String?                        @db.VarChar(100)
+  is_active                    Boolean
+  is_staff                     Boolean
+  is_deleted                   Boolean
+  custom_user_groups           custom_user_groups[]
+  custom_user_user_permissions custom_user_user_permissions[]
+  django_admin_log             django_admin_log[]
+
+  @@index([email], map: "custom_user_email_54654c31_like")
+}
+
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model custom_user_groups {
+  id            BigInt      @id @default(autoincrement())
+  customuser_id BigInt
+  group_id      Int
+  custom_user   custom_user @relation(fields: [customuser_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "custom_user_groups_customuser_id_8e3d0338_fk_custom_user_id")
+  auth_group    auth_group  @relation(fields: [group_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "custom_user_groups_group_id_02874f21_fk_auth_group_id")
+
+  @@unique([customuser_id, group_id], map: "custom_user_groups_customuser_id_group_id_ea14f886_uniq")
+  @@index([customuser_id], map: "custom_user_groups_customuser_id_8e3d0338")
+  @@index([group_id], map: "custom_user_groups_group_id_02874f21")
+}
+
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model custom_user_user_permissions {
+  id              BigInt          @id @default(autoincrement())
+  customuser_id   BigInt
+  permission_id   Int
+  custom_user     custom_user     @relation(fields: [customuser_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "custom_user_user_per_customuser_id_ec2da4cb_fk_custom_us")
+  auth_permission auth_permission @relation(fields: [permission_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "custom_user_user_per_permission_id_f82b5e3f_fk_auth_perm")
+
+  @@unique([customuser_id, permission_id], map: "custom_user_user_permiss_customuser_id_permission_f9232336_uniq")
+  @@index([customuser_id], map: "custom_user_user_permissions_customuser_id_ec2da4cb")
+  @@index([permission_id], map: "custom_user_user_permissions_permission_id_f82b5e3f")
+}
+
+model customer_order {
+  ObjectID                                   String    @id @db.VarChar(70)
+  InformationLifeCycleStatusCode             String?   @db.VarChar(10)
+  InformationLifeCycleStatusCodeText         String?   @db.VarChar(100)
+  BuyerID                                    String?   @db.VarChar(100)
+  ID                                         String?   @db.VarChar(100)
+  LastChangeDate                             DateTime? @db.Timestamptz(6)
+  OrderExternalLifeCycleStatusCode           String?   @db.VarChar(10)
+  OrderExternalLifeCycleStatusCodeText       String?   @db.VarChar(100)
+  Name                                       String?   @db.VarChar(255)
+  ProcessingTypeCode                         String?   @db.VarChar(70)
+  ProcessingTypeCodeText                     String?   @db.VarChar(255)
+  ItemListCancellationStatusCode             String?   @db.VarChar(10)
+  ItemListCancellationStatusCodeText         String?   @db.VarChar(255)
+  ItemListFulfilmentProcessingStatusCode     String?   @db.VarChar(10)
+  ItemListFulfilmentProcessingStatusCodeText String?   @db.VarChar(255)
+  ConsistencyStatusCode                      String?   @db.VarChar(10)
+  ConsistencyStatusCodeText                  String?   @db.VarChar(255)
+  OverallBlockingStatusCode                  String?   @db.VarChar(10)
+  OverallBlockingStatusCodeText              String?   @db.VarChar(255)
+  ReplicationProcessingStatusCode            String?   @db.VarChar(10)
+  ReplicationProcessingStatusCodeText        String?   @db.VarChar(255)
+  DistributionChannelCode                    String?   @db.VarChar(10)
+  DistributionChannelCodeText                String?   @db.VarChar(255)
+  SalesOrganisationID                        String?   @db.VarChar(10)
+  SalesTerritoryID                           String?   @db.VarChar(100)
+  BuyerPartyID                               String?   @db.VarChar(100)
+  DeliveryPriorityCode                       String?   @db.VarChar(10)
+  DeliveryPriorityCodeText                   String?   @db.VarChar(100)
+  EmployeeResponsiblePartyID                 String?   @db.VarChar(100)
+  BuyerPartyName                             String?   @db.VarChar(255)
+  EmployeeResponsiblePartyName               String?   @db.VarChar(255)
+  BuyerContactPartyID                        String?   @db.VarChar(255)
+  BuyerContactPartyName                      String?   @db.VarChar(255)
+  PriceDateTime                              DateTime? @db.Timestamptz(6)
+  ProductRecipientPartyID                    String?   @db.VarChar(255)
+  ProductRecipientPartyName                  String?   @db.VarChar(255)
+  DateTime                                   DateTime? @db.Timestamptz(6)
+  MaintenanceModeInternalOnlyMainDiscount    String?   @db.VarChar(255)
+  NetAmount                                  String?   @db.VarChar(255)
+  GrossAmount                                String?   @db.VarChar(255)
+  TaxAmount                                  String?   @db.VarChar(255)
+  PlantPartyID                               String?   @db.VarChar(10)
+  PlantPartyName                             String?   @db.VarChar(255)
+  EntityLastChangedOn                        DateTime? @db.Timestamptz(6)
+  ETag                                       DateTime? @db.Timestamptz(6)
+  GlobalOrderNumber_KUT                      String?   @db.VarChar(255)
+  ZCAMSOrderNumber_KUT                       String?   @db.VarChar(255)
+  ZOrderStatus_KUT                           String?   @db.VarChar(255)
+  ZOrderStatus_KUTText                       String?   @db.VarChar(255)
+
+  @@index([ObjectID], map: "customer_order_ObjectID_0e1b8611_like")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model django_admin_log {
+  id                  Int                  @id @default(autoincrement())
+  action_time         DateTime             @db.Timestamptz(6)
+  object_id           String?
+  object_repr         String               @db.VarChar(200)
+  action_flag         Int                  @db.SmallInt
+  change_message      String
+  content_type_id     Int?
+  user_id             BigInt
+  django_content_type django_content_type? @relation(fields: [content_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "django_admin_log_content_type_id_c4bce8eb_fk_django_co")
+  custom_user         custom_user          @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "django_admin_log_user_id_c564eba6_fk_custom_user_id")
+
+  @@index([content_type_id], map: "django_admin_log_content_type_id_c4bce8eb")
+  @@index([user_id], map: "django_admin_log_user_id_c564eba6")
+}
+
+model django_content_type {
+  id               Int                @id @default(autoincrement())
+  app_label        String             @db.VarChar(100)
+  model            String             @db.VarChar(100)
+  auth_permission  auth_permission[]
+  django_admin_log django_admin_log[]
+
+  @@unique([app_label, model], map: "django_content_type_app_label_model_76bd3d3b_uniq")
+}
+
+model django_migrations {
+  id      BigInt   @id @default(autoincrement())
+  app     String   @db.VarChar(255)
+  name    String   @db.VarChar(255)
+  applied DateTime @db.Timestamptz(6)
+}
+
+model django_session {
+  session_key  String   @id @db.VarChar(40)
+  session_data String
+  expire_date  DateTime @db.Timestamptz(6)
+
+  @@index([expire_date], map: "django_session_expire_date_a5c62663")
+  @@index([session_key], map: "django_session_session_key_c0390e0f_like")
+}
+
+model employee_academic_title_codes {
+  Code        String      @id @db.VarChar(10)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_academic_title_codes_Code_f9be5043_like")
+}
+
+model employee_country_codes {
+  Code        String      @id @db.VarChar(2)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_country_codes_Code_e593ed45_like")
+}
+
+model employee_gender_codes {
+  Code        String      @id @db.VarChar(10)
+  Description String?     @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_gender_codes_Code_114c2ebe_like")
+}
+
+model employee_language_codes {
+  Code        String      @id @db.VarChar(10)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_language_codes_Code_2e339985_like")
+}
+
+model employee_marital_status_codes {
+  Code        String      @id @db.VarChar(10)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_marital_status_codes_Code_db97f618_like")
+}
+
+model employee_nationality_country_codes {
+  Code        String      @id @db.VarChar(2)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_nationality_country_codes_Code_1ce57060_like")
+}
+
+model employee_po_box_country_codes {
+  Code        String      @id @db.VarChar(2)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_po_box_country_codes_Code_a0a94894_like")
+}
+
+model employee_po_box_region_codes {
+  id          Int         @id @default(autoincrement())
+  Code        String      @db.VarChar(10)
+  Context     String      @db.VarChar(10)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+}
+
+model employee_region_codes {
+  id          Int         @id @default(autoincrement())
+  Code        String      @db.VarChar(10)
+  Context     String      @db.VarChar(10)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+}
+
+model employee_tax_jurisdiction_codes {
+  Code        String      @id @db.VarChar(20)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_tax_jurisdiction_codes_Code_2ec1ec5b_like")
+}
+
+model employee_time_zone_codes {
+  Code        String      @id @db.VarChar(20)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_time_zone_codes_Code_a3af02c7_like")
+}
+
+model employee_title_codes {
+  Code        String      @id @db.VarChar(10)
+  Description String?     @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_title_codes_Code_8a858e81_like")
+}
+
+model employee_user_password_policy_codes {
+  Code        String      @id @db.VarChar(255)
+  Description String      @db.VarChar(255)
+  employees   employees[]
+
+  @@index([Code], map: "employee_user_password_policy_codes_Code_a14d3367_like")
+}
+
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model employees {
+  ObjectID                            String                               @id @db.VarChar(255)
+  EmployeeID                          String                               @db.VarChar(255)
+  UUID                                String                               @db.VarChar(255)
+  UserID                              String                               @db.VarChar(255)
+  BusinessPartnerID                   String                               @db.VarChar(255)
+  EmployeeValidityStartDate           DateTime                             @db.Timestamptz(6)
+  EmployeeValidityEndDate             DateTime                             @db.Timestamptz(6)
+  BusinessPartnerFormattedName        String?                              @db.VarChar(255)
+  FirstName                           String?                              @db.VarChar(255)
+  MiddleName                          String?                              @db.VarChar(255)
+  LastName                            String?                              @db.VarChar(255)
+  SecondLastName                      String?                              @db.VarChar(255)
+  NickName                            String?                              @db.VarChar(255)
+  BirthName                           String?                              @db.VarChar(255)
+  BirthDate                           DateTime?                            @db.Timestamptz(6)
+  BirthPlace                          String?                              @db.VarChar(255)
+  FormattedPostalAddressDescription   String?                              @db.VarChar(255)
+  CareOfName                          String?                              @db.VarChar(255)
+  AddressLine1                        String?                              @db.VarChar(255)
+  AddressLine2                        String?                              @db.VarChar(255)
+  HouseNumber                         String?                              @db.VarChar(255)
+  Street                              String?                              @db.VarChar(255)
+  AddressLine4                        String?                              @db.VarChar(255)
+  AddressLine5                        String?                              @db.VarChar(255)
+  District                            String?                              @db.VarChar(255)
+  City                                String?                              @db.VarChar(255)
+  DifferentCity                       String?                              @db.VarChar(255)
+  PostalCode                          String?                              @db.VarChar(255)
+  County                              String?                              @db.VarChar(255)
+  CompanyPostalCode                   String?                              @db.VarChar(255)
+  POBox                               String?                              @db.VarChar(255)
+  POBoxPostalCode                     String?                              @db.VarChar(255)
+  POBoxCity                           String?                              @db.VarChar(255)
+  Building                            String?                              @db.VarChar(255)
+  Floor                               String?                              @db.VarChar(255)
+  Room                                String?                              @db.VarChar(255)
+  InhouseMail                         String?                              @db.VarChar(255)
+  OfficePhoneNumber                   String?                              @db.VarChar(255)
+  NormalisedOfficePhoneNumber         String?                              @db.VarChar(255)
+  MobilePhoneNumber                   String?                              @db.VarChar(255)
+  NormalisedMobilePhoneNumber         String?                              @db.VarChar(255)
+  FaxNumber                           String?                              @db.VarChar(255)
+  Email                               String?                              @db.VarChar(254)
+  UserValidityStartDate               DateTime?                            @db.Timestamptz(6)
+  UserValidityEndDate                 DateTime?                            @db.Timestamptz(6)
+  UserLockedIndicator                 Boolean
+  UserCountedIndicator                Boolean
+  CreatedOn                           DateTime?                            @db.Timestamptz(6)
+  CreatedBy                           String?                              @db.VarChar(255)
+  CreatedByIdentityUUID               String?                              @db.VarChar(255)
+  ChangedOn                           DateTime?                            @db.Timestamptz(6)
+  ChangedBy                           String?                              @db.VarChar(255)
+  ChangedByIdentityUUID               String?                              @db.VarChar(255)
+  EntityLastChangedOn                 DateTime?                            @db.Timestamptz(6)
+  ETag                                DateTime?                            @db.Timestamptz(6)
+  Division_KUT                        String?                              @db.VarChar(255)
+  Division_KUTText                    String?                              @db.VarChar(255)
+  EmployeeTerritoryDescription_KUT    String?                              @db.VarChar(255)
+  ZAboutMe_KUT                        String?
+  ZAddRepl_KUT                        String?                              @db.VarChar(255)
+  ZAddRepl_KUTText                    String?                              @db.VarChar(255)
+  ZAreaCd_KUT                         String?                              @db.VarChar(255)
+  ZBusinessType_KUT                   String?                              @db.VarChar(255)
+  ZBusinessType_KUTText               String?                              @db.VarChar(255)
+  ZDurkanEmployeeID_KUT               String?                              @db.VarChar(255)
+  ZIndExp_KUT                         String?                              @db.VarChar(255)
+  ZIndExp_KUTText                     String?                              @db.VarChar(255)
+  ZSalesBudgetContent_KUT             Float?
+  ZSalesBudgetcurrencyCode_KUT        String?                              @db.VarChar(255)
+  ZSalesBudgetcurrencyCode_KUTText    String?                              @db.VarChar(255)
+  AcademicTitleCode_id                String?                              @db.VarChar(10)
+  CountryCode_id                      String?                              @db.VarChar(2)
+  GenderCode_id                       String?                              @db.VarChar(10)
+  LanguageCode_id                     String?                              @db.VarChar(10)
+  MaritalStatusCode_id                String?                              @db.VarChar(10)
+  NationalityCountryCode_id           String?                              @db.VarChar(2)
+  POBoxCountryCode_id                 String?                              @db.VarChar(2)
+  POBoxRegionCode_id                  Int?
+  RegionCode_id                       Int?
+  TaxJurisdictionCode_id              String?                              @db.VarChar(20)
+  TimeZoneCode_id                     String?                              @db.VarChar(20)
+  TitleCode_id                        String?                              @db.VarChar(10)
+  UserPasswordPolicyCode_id           String?                              @db.VarChar(255)
+  employee_academic_title_codes       employee_academic_title_codes?       @relation(fields: [AcademicTitleCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_AcademicTitleCode_id_0a896e84_fk_employee_")
+  employee_country_codes              employee_country_codes?              @relation(fields: [CountryCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_CountryCode_id_a5e0b701_fk_employee_")
+  employee_gender_codes               employee_gender_codes?               @relation(fields: [GenderCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_GenderCode_id_7156fefc_fk_employee_gender_codes_Code")
+  employee_language_codes             employee_language_codes?             @relation(fields: [LanguageCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_LanguageCode_id_7f8ffe73_fk_employee_")
+  employee_marital_status_codes       employee_marital_status_codes?       @relation(fields: [MaritalStatusCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_MaritalStatusCode_id_1524743b_fk_employee_")
+  employee_nationality_country_codes  employee_nationality_country_codes?  @relation(fields: [NationalityCountryCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_NationalityCountryCo_548280c5_fk_employee_")
+  employee_po_box_country_codes       employee_po_box_country_codes?       @relation(fields: [POBoxCountryCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_POBoxCountryCode_id_0e95dc8b_fk_employee_")
+  employee_po_box_region_codes        employee_po_box_region_codes?        @relation(fields: [POBoxRegionCode_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "employees_POBoxRegionCode_id_001e83ad_fk_employee_")
+  employee_region_codes               employee_region_codes?               @relation(fields: [RegionCode_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "employees_RegionCode_id_495829aa_fk_employee_region_codes_id")
+  employee_tax_jurisdiction_codes     employee_tax_jurisdiction_codes?     @relation(fields: [TaxJurisdictionCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_TaxJurisdictionCode__2fbca0c8_fk_employee_")
+  employee_time_zone_codes            employee_time_zone_codes?            @relation(fields: [TimeZoneCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_TimeZoneCode_id_6e49531e_fk_employee_")
+  employee_title_codes                employee_title_codes?                @relation(fields: [TitleCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_TitleCode_id_8fd4b359_fk_employee_title_codes_Code")
+  employee_user_password_policy_codes employee_user_password_policy_codes? @relation(fields: [UserPasswordPolicyCode_id], references: [Code], onDelete: NoAction, onUpdate: NoAction, map: "employees_UserPasswordPolicyCo_417b26c0_fk_employee_")
+
+  @@index([AcademicTitleCode_id], map: "employees_AcademicTitleCode_id_0a896e84")
+  @@index([AcademicTitleCode_id], map: "employees_AcademicTitleCode_id_0a896e84_like")
+  @@index([CountryCode_id], map: "employees_CountryCode_id_a5e0b701")
+  @@index([CountryCode_id], map: "employees_CountryCode_id_a5e0b701_like")
+  @@index([GenderCode_id], map: "employees_GenderCode_id_7156fefc")
+  @@index([GenderCode_id], map: "employees_GenderCode_id_7156fefc_like")
+  @@index([LanguageCode_id], map: "employees_LanguageCode_id_7f8ffe73")
+  @@index([LanguageCode_id], map: "employees_LanguageCode_id_7f8ffe73_like")
+  @@index([MaritalStatusCode_id], map: "employees_MaritalStatusCode_id_1524743b")
+  @@index([MaritalStatusCode_id], map: "employees_MaritalStatusCode_id_1524743b_like")
+  @@index([NationalityCountryCode_id], map: "employees_NationalityCountryCode_id_548280c5")
+  @@index([NationalityCountryCode_id], map: "employees_NationalityCountryCode_id_548280c5_like")
+  @@index([ObjectID], map: "employees_ObjectID_e6fe2ff9_like")
+  @@index([POBoxCountryCode_id], map: "employees_POBoxCountryCode_id_0e95dc8b")
+  @@index([POBoxCountryCode_id], map: "employees_POBoxCountryCode_id_0e95dc8b_like")
+  @@index([POBoxRegionCode_id], map: "employees_POBoxRegionCode_id_001e83ad")
+  @@index([RegionCode_id], map: "employees_RegionCode_id_495829aa")
+  @@index([TaxJurisdictionCode_id], map: "employees_TaxJurisdictionCode_id_2fbca0c8")
+  @@index([TaxJurisdictionCode_id], map: "employees_TaxJurisdictionCode_id_2fbca0c8_like")
+  @@index([TimeZoneCode_id], map: "employees_TimeZoneCode_id_6e49531e")
+  @@index([TimeZoneCode_id], map: "employees_TimeZoneCode_id_6e49531e_like")
+  @@index([TitleCode_id], map: "employees_TitleCode_id_8fd4b359")
+  @@index([TitleCode_id], map: "employees_TitleCode_id_8fd4b359_like")
+  @@index([UserPasswordPolicyCode_id], map: "employees_UserPasswordPolicyCode_id_417b26c0")
+  @@index([UserPasswordPolicyCode_id], map: "employees_UserPasswordPolicyCode_id_417b26c0_like")
+}
+
+model geographic_data {
+  id                Int     @id @default(autoincrement())
+  ZipCode           String  @db.VarChar(10)
+  CountyFips        String? @db.VarChar(10)
+  County            String? @db.VarChar(255)
+  StateFips         String? @db.VarChar(10)
+  StateAbbreviation String? @db.VarChar(20)
+  State             String? @db.VarChar(255)
+}
+
+model hubspot_customer_info {
+  id                            Int       @id @default(autoincrement())
+  Record_ID                     String?   @db.VarChar(255)
+  First_Name                    String?   @db.VarChar(255)
+  Last_Name                     String?   @db.VarChar(255)
+  Email                         String?   @db.VarChar(255)
+  Phone_Number                  String?   @db.VarChar(255)
+  Contact_Owner                 String?   @db.VarChar(255)
+  Primary_Associated_Company_ID String?   @db.VarChar(255)
+  Last_Activity_Date            DateTime? @db.Timestamptz(6)
+  Lead_Status                   String?   @db.VarChar(255)
+  Marketing_Contact_Status      String?   @db.VarChar(255)
+  Create_Date                   DateTime? @db.Timestamptz(6)
+  Additional_Email_Addresses    String?
+  Associated_Company            String?
+  Dmain_Name                    String?   @db.VarChar(255)
+}
+
+model leads {
+  ObjectID                                     String    @id @db.VarChar(70)
+  ID                                           String?   @db.VarChar(10)
+  Name                                         String?   @db.VarChar(255)
+  NameLanguageCodeText                         String?   @db.VarChar(50)
+  AccountPartyID                               String?   @db.VarChar(50)
+  AccountPartyUUID                             String?   @db.VarChar(70)
+  AccountPartyName                             String?   @db.VarChar(255)
+  ContactID                                    String?   @db.VarChar(50)
+  ContactUUID                                  String?   @db.VarChar(70)
+  ContactName                                  String?   @db.VarChar(255)
+  Company                                      String?   @db.VarChar(255)
+  QualificationLevelCodeText                   String?   @db.VarChar(50)
+  UserStatusCodeText                           String?   @db.VarChar(50)
+  ConsistencyStatusCodeText                    String?   @db.VarChar(50)
+  OriginTypeCodeText                           String?   @db.VarChar(50)
+  PriorityCodeText                             String?   @db.VarChar(50)
+  StartDate                                    DateTime? @db.Timestamptz(6)
+  EndDate                                      DateTime? @db.Timestamptz(6)
+  CampaignID                                   String?   @db.VarChar(255)
+  GroupCodeText                                String?   @db.VarChar(50)
+  OwnerPartyID                                 String?   @db.VarChar(50)
+  OwnerPartyUUID                               String?   @db.VarChar(70)
+  EmployeeResponsibleUUID                      String?   @db.VarChar(70)
+  OwnerPartyName                               String?   @db.VarChar(255)
+  CreationDateTime                             DateTime? @db.Timestamptz(6)
+  LastChangeDateTime                           DateTime? @db.Timestamptz(6)
+  Note                                         String?
+  SalesTerritoryID                             String?   @db.VarChar(50)
+  SalesTerritoryName                           String?   @db.VarChar(255)
+  ExpectedRevenueAmount                        Decimal   @db.Decimal(12, 6)
+  ExpectedRevenueCurrencyCodeText              String?   @db.VarChar(50)
+  Score                                        Int
+  AccountPostalAddressElementsStreetName       String?   @db.VarChar(255)
+  AccountCity                                  String?   @db.VarChar(255)
+  AccountCountryText                           String?   @db.VarChar(255)
+  AccountStateText                             String?   @db.VarChar(255)
+  AccountPostalAddressElementsStreetPostalCode String?   @db.VarChar(10)
+  AccountPhone                                 String?   @db.VarChar(50)
+  AccountFax                                   String?   @db.VarChar(50)
+  AccountMobile                                String?   @db.VarChar(50)
+  AccountEMail                                 String?   @db.VarChar(254)
+  AccountWebsite                               String?   @db.VarChar(1024)
+  OrganisationAccountABCClassificationCodeText String?   @db.VarChar(50)
+  AccountCorrespondenceLanguageCodeText        String?   @db.VarChar(50)
+  AccountNote                                  String?
+  ContactPhone                                 String?   @db.VarChar(50)
+  ContactMobile                                String?   @db.VarChar(50)
+  ContactEMail                                 String?   @db.VarChar(254)
+  ContactNote                                  String?
+  AccountLifeCycleStatusCodeText               String?   @db.VarChar(50)
+  MainContactLifeCycleStatusCodeText           String?   @db.VarChar(50)
+  LifeCycleStatusCodeText                      String?   @db.VarChar(50)
+  CreatedBy                                    String?   @db.VarChar(255)
+  LastChangedBy                                String?   @db.VarChar(255)
+  EntityLastChangedOn                          DateTime? @db.Timestamptz(6)
+  ETag                                         DateTime? @db.Timestamptz(6)
+  ZCONTBUDGETContent_KUT                       Decimal   @db.Decimal(12, 6)
+  ZCONTBUDGETcurrencyCode_KUTText              String?   @db.VarChar(50)
+  ZMarketSegment_KUTText                       String?   @db.VarChar(50)
+
+  @@index([ObjectID], map: "leads_ObjectID_1d1df594_like")
+}
+
+model opportunity {
+  ObjectID                                     String    @id @db.VarChar(70)
+  ProcessingTypeCodeText                       String?   @db.VarChar(50)
+  ID                                           String?   @db.VarChar(20)
+  UUID                                         String?   @db.VarChar(70)
+  ProspectPartyID                              String?   @db.VarChar(20)
+  Name                                         String?   @db.VarChar(255)
+  PrimaryContactPartyID                        String?   @db.VarChar(20)
+  PriorityCodeText                             String?   @db.VarChar(50)
+  OriginTypeCodeText                           String?   @db.VarChar(100)
+  LifeCycleStatusCodeText                      String?   @db.VarChar(100)
+  ResultReasonCodeText                         String?   @db.VarChar(100)
+  SalesCycleCodeText                           String?   @db.VarChar(100)
+  SalesCyclePhaseCodeText                      String?   @db.VarChar(100)
+  ProcessStatusValidSinceDate                  DateTime? @db.Timestamptz(6)
+  SalesCyclePhaseStartDate                     DateTime? @db.Timestamptz(6)
+  ProbabilityPercent                           String?   @db.VarChar(50)
+  HeaderRevenueSchedule                        Boolean?
+  SalesRevenueForecastRelevanceIndicator       Boolean?
+  ExpectedRevenueAmount                        String?   @db.VarChar(50)
+  ExpectedRevenueAmountCurrencyCodeText        String?   @db.VarChar(100)
+  TotalExpectedNetAmount                       String?   @db.VarChar(50)
+  TotalExpectedNetAmountAmountCurrencyCodeText String?   @db.VarChar(100)
+  WeightedExpectedNetAmount                    String?   @db.VarChar(50)
+  WeightedExpectedNetAmountCurrencyCodeText    String?   @db.VarChar(100)
+  ExpectedProcessingStartDate                  DateTime? @db.Timestamptz(6)
+  ExpectedProcessingEndDate                    DateTime? @db.Timestamptz(6)
+  ExpectedRevenueStartDate                     DateTime? @db.Timestamptz(6)
+  ExpectedRevenueEndDate                       DateTime? @db.Timestamptz(6)
+  SalesForecastCategoryCodeText                String?   @db.VarChar(100)
+  SalesUnitPartyID                             String?   @db.VarChar(20)
+  SalesOrganisationID                          String?   @db.VarChar(10)
+  DistributionChannelCodeText                  String?   @db.VarChar(100)
+  SalesTerritoryID                             String?   @db.VarChar(20)
+  MainEmployeeResponsiblePartyID               String?   @db.VarChar(20)
+  PhaseProgressEvaluationStatusCodeText        String?   @db.VarChar(50)
+  ProspectBudgetAmount                         String?   @db.VarChar(50)
+  ProspectBudgetAmountCurrencyCodeText         String?   @db.VarChar(100)
+  Score                                        Int?
+  MainEmployeeResponsiblePartyName             String?   @db.VarChar(255)
+  SalesUnityPartyName                          String?   @db.VarChar(255)
+  PrimaryContactPartyName                      String?   @db.VarChar(255)
+  ProspectPartyName                            String?   @db.VarChar(255)
+  SalesTerritoryName                           String?   @db.VarChar(255)
+  ConsistencyStatusCodeText                    String?   @db.VarChar(50)
+  CreationDateTime                             DateTime? @db.Timestamptz(6)
+  LastChangeDateTime                           DateTime? @db.Timestamptz(6)
+  CreatedBy                                    String?   @db.VarChar(255)
+  LastChangedBy                                String?   @db.VarChar(255)
+  EntityLastChangedOn                          DateTime? @db.Timestamptz(6)
+  ETag                                         DateTime? @db.Timestamptz(6)
+  DealScore                                    String?   @db.VarChar(50)
+  TotalRevenueContent_KUT                      String?   @db.VarChar(50)
+  TotalRevenuecurrencyCode_KUTText             String?   @db.VarChar(100)
+  ZLateStageReason_KUTText                     String?   @db.VarChar(255)
+
+  @@index([ObjectID], map: "opportunity_ObjectID_103bd3d4_like")
+}
+
+model project {
+  ObjectID                                  String    @id @db.VarChar(70)
+  ID                                        String?   @db.VarChar(255)
+  UUID                                      String?   @db.VarChar(255)
+  ProcessingTypeCode                        String?   @db.VarChar(255)
+  ProcessingTypeCodeText                    String?   @db.VarChar(255)
+  DataOriginTypeCode                        String?   @db.VarChar(10)
+  DataOriginTypeCodeText                    String?   @db.VarChar(255)
+  EscalationStatusCode                      String?   @db.VarChar(10)
+  EscalationStatusCodeText                  String?   @db.VarChar(255)
+  ServicePriorityCode                       String?   @db.VarChar(10)
+  ServicePriorityCodeText                   String?   @db.VarChar(255)
+  ServiceRequestUserLifeCycleStatusCode     String?   @db.VarChar(10)
+  ServiceRequestUserLifeCycleStatusCodeText String?   @db.VarChar(255)
+  RequestedFulfillmentPeriodStartDateTime   DateTime? @db.Timestamptz(6)
+  RequestedFulfillmentPeriodEndDateTime     DateTime? @db.Timestamptz(6)
+  RequestedTotalProcessingDuration          String?   @db.VarChar(255)
+  RequestedTotalRequestorDuration           String?   @db.VarChar(255)
+  RequestInitialReceiptdatetimecontent      DateTime? @db.Timestamptz(6)
+  RequestInProcessdatetimeContent           DateTime? @db.Timestamptz(6)
+  RequestCloseddatetimeContent              DateTime? @db.Timestamptz(6)
+  RequestFinisheddatetimeContent            DateTime? @db.Timestamptz(6)
+  FirstReactionDuedatetimeContent           DateTime? @db.Timestamptz(6)
+  CompleteDuedatetimeContent                DateTime? @db.Timestamptz(6)
+  ServiceSupportTeamPartyID                 String?   @db.VarChar(255)
+  ServicePerformerPartyID                   String?   @db.VarChar(255)
+  ProcessorPartyID                          String?   @db.VarChar(255)
+  BuyerPartyID                              String?   @db.VarChar(255)
+  BuyerMainContactPartyID                   String?   @db.VarChar(255)
+  ServiceSupportTeamPartyName               String?   @db.VarChar(255)
+  ProcessorPartyName                        String?   @db.VarChar(255)
+  BuyerPartyName                            String?   @db.VarChar(255)
+  BuyerMainContactPartyName                 String?   @db.VarChar(255)
+  BuyerPartyUUID                            String?   @db.VarChar(255)
+  BuyerMainContactPartyUUID                 String?   @db.VarChar(255)
+  ProcessorPartyUUID                        String?   @db.VarChar(255)
+  ServiceSupportTeamPartyUUID               String?   @db.VarChar(255)
+  ReportedPartyID                           String?   @db.VarChar(255)
+  ReportedPartyUUID                         String?   @db.VarChar(255)
+  ServiceIssueCategoryID                    String?   @db.VarChar(255)
+  ServiceRequestClassificationCode          String?   @db.VarChar(255)
+  ServiceRequestClassificationCodeText      String?   @db.VarChar(255)
+  CreationDateTime                          DateTime? @db.Timestamptz(6)
+  ReportedPartyName                         String?   @db.VarChar(255)
+  LastChangeDateTime                        DateTime? @db.Timestamptz(6)
+  CreationIdentityUUID                      String?   @db.VarChar(255)
+  LastChangeIdentityUUID                    String?   @db.VarChar(255)
+  CreatedBy                                 String?   @db.VarChar(255)
+  LastChangedBy                             String?   @db.VarChar(255)
+  WarrantyFrom                              DateTime? @db.Timestamptz(6)
+  WarrantyTo                                DateTime? @db.Timestamptz(6)
+  ServiceRequestLifeCycleStatusCode         String?   @db.VarChar(10)
+  ServiceRequestLifeCycleStatusCodeText     String?   @db.VarChar(255)
+  RequestAssignmentStatusCode               String?   @db.VarChar(10)
+  RequestAssignmentStatusCodeText           String?   @db.VarChar(255)
+  DocumentLanguageCode                      String?   @db.VarChar(10)
+  DocumentLanguageCodeText                  String?   @db.VarChar(255)
+  EntityLastChangedOn                       DateTime? @db.Timestamptz(6)
+  ETag                                      DateTime? @db.Timestamptz(6)
+  iPadTicketURL_SDK                         String?   @db.VarChar(255)
+  defSellPricecontent_SDK                   String?   @db.VarChar(255)
+  defTspcontent_SDK                         String?   @db.VarChar(255)
+  defTspcurrencyCode_SDK                    String?   @db.VarChar(255)
+  defTspcurrencyCode_SDKText                String?   @db.VarChar(255)
+  defYardcontent_SDK                        String?   @db.VarChar(255)
+  MarketSegmentcontent_SDK                  String?   @db.VarChar(255)
+  MarketSegmentcontent_SDKText              String?   @db.VarChar(255)
+  ProbabilityPercentcontent_SDK             String?   @db.VarChar(10)
+  ProbabilityPercentcontent_SDKText         String?   @db.VarChar(255)
+  totalSellPricecontent_SDK                 String?   @db.VarChar(255)
+  totalSellPricecurrencyCode_SDK            String?   @db.VarChar(255)
+  totalSellPricecurrencyCode_SDKText        String?   @db.VarChar(255)
+  totalSqYardcontent_SDK                    String?   @db.VarChar(255)
+  totalSqYardunitCode_SDK                   String?   @db.VarChar(255)
+  totalSqYardunitCode_SDKText               String?   @db.VarChar(255)
+  TotalSqYardscontent_SDK                   String?   @db.VarChar(255)
+  ZSchemePrototypescontent_SDK              String?   @db.VarChar(255)
+  ZSchemePrototypescontent_SDKText          String?   @db.VarChar(255)
+  HighProfileProject_SDK                    Boolean
+  DurkanTicketID_KUT                        String?   @db.VarChar(255)
+
+  @@index([ObjectID], map: "project_ObjectID_67a5c68d_like")
+}
+
+model quote {
+  ObjectID                          String    @id @db.VarChar(70)
+  ID                                String?   @db.VarChar(10)
+  BuyerID                           String?   @db.VarChar(20)
+  Name                              String?   @db.VarChar(255)
+  BuyerPartyID                      String?   @db.VarChar(20)
+  BuyerPartyName                    String?   @db.VarChar(255)
+  BuyerContactPartyID               String?   @db.VarChar(10)
+  BuyerContactPartyName             String?   @db.VarChar(255)
+  ProductRecipientPartyID           String?   @db.VarChar(20)
+  ProductRecipientPartyName         String?   @db.VarChar(255)
+  EmployeeResponsiblePartyID        String?   @db.VarChar(20)
+  EmployeeResponsiblePartyName      String?   @db.VarChar(255)
+  SalesTerritoryID                  String?   @db.VarChar(50)
+  SalesTerritoryName                String?   @db.VarChar(255)
+  DateTime                          DateTime? @db.Timestamptz(6)
+  RequestedFulfillmentStartDateTime String?   @db.VarChar(255)
+  PriceDateTime                     DateTime? @db.Timestamptz(6)
+  TimeZoneCode                      String?   @db.VarChar(50)
+  TimeZoneCodeText                  String?   @db.VarChar(255)
+  ValidFromDate                     DateTime? @db.Timestamptz(6)
+  ValidToDate                       DateTime? @db.Timestamptz(6)
+  CurrencyCode                      String?   @db.VarChar(10)
+  CurrencyCodeText                  String?   @db.VarChar(255)
+  DocumentLanguageCode              String?   @db.VarChar(10)
+  DocumentLanguageCodeText          String?   @db.VarChar(255)
+  DeliveryPriorityCode              String?   @db.VarChar(10)
+  DeliveryPriorityCodeText          String?   @db.VarChar(255)
+  ProbabilityPercent                Decimal?  @db.Decimal(10, 2)
+  CancellationReasonCode            String?   @db.VarChar(10)
+  CancellationReasonCodeText        String?
+  OrderReasonCode                   String?   @db.VarChar(10)
+  OrderReasonCodeText               String?
+  MainDiscount                      Decimal?  @db.Decimal(20, 2)
+  NetAmount                         Decimal?  @db.Decimal(20, 2)
+  GrossAmount                       Decimal?  @db.Decimal(20, 2)
+  TaxAmount                         Decimal?  @db.Decimal(20, 2)
+  ConfirmationExistenceIndicator    Boolean?
+  ConsistencyStatusCode             String?   @db.VarChar(10)
+  ConsistencyStatusCodeText         String?   @db.VarChar(255)
+  LifeCycleStatusCode               String?   @db.VarChar(10)
+  LifeCycleStatusCodeText           String?   @db.VarChar(255)
+  CancellationStatusCode            String?   @db.VarChar(10)
+  CancellationStatusCodeText        String?   @db.VarChar(255)
+  OrderingStatusCode                String?   @db.VarChar(255)
+  ProductAvailabilityStatusCode     String?   @db.VarChar(10)
+  ProductAvailabilityStatusCodeText String?   @db.VarChar(255)
+  PriceCalculationStatusCode        String?   @db.VarChar(10)
+  PriceCalculationStatusCodeText    String?   @db.VarChar(255)
+  CreationDateTime                  DateTime? @db.Timestamptz(6)
+  LastChangeDateTime                DateTime? @db.Timestamptz(6)
+  CreationIdentityUUID              String?   @db.VarChar(255)
+  LastChangeIdentityUUID            String?   @db.VarChar(255)
+  VersionGroupID                    String?   @db.VarChar(50)
+  VersionID                         String?   @db.VarChar(10)
+  Submit                            Boolean?
+  SetAsWon                          Boolean?
+  SetAsLost                         Boolean?
+  PrimaryQuote                      Boolean?
+  RequestExtFollowup                Boolean?
+  GrossWeightMeasure                Decimal?  @db.Decimal(20, 2)
+  NetWeightMeasure                  Decimal?  @db.Decimal(20, 2)
+  VolumeMeasure                     Decimal?  @db.Decimal(20, 2)
+  EntityLastChangedOn               DateTime? @db.Timestamptz(6)
+  ETag                              DateTime? @db.Timestamptz(6)
+  ZJOB_LOCATION_KUT                 String?   @db.VarChar(255)
+  ZMHK_submittedFor_KUT             String?   @db.VarChar(255)
+  ZMOH_OwnerID_KUT                  String?   @db.VarChar(255)
+  ZMarketSegment_KUT                String?   @db.VarChar(255)
+  ZMarketSegment_KUTText            String?   @db.VarChar(255)
+
+  @@index([ObjectID], map: "quote_ObjectID_b95a2dba_like")
+}
+
+model sales_territory {
+  ObjectID               String    @id @db.VarChar(70)
+  Id                     String?   @db.VarChar(10)
+  Name                   String?   @db.VarChar(255)
+  ParentID               String?   @db.VarChar(70)
+  EmployeeResponsible    String?   @db.VarChar(255)
+  HierarchyLevelCode     String?   @db.VarChar(50)
+  HierarchyLevelCodeText String?   @db.VarChar(255)
+  EntityLastChangedOn    DateTime? @db.Timestamptz(6)
+  ETag                   DateTime? @db.Timestamptz(6)
+
+  @@index([ObjectID], map: "sales_territory_ObjectID_8b1d2faf_like")
+}
+
+model sales_territory_employee_role {
+  EmployeeID          String    @id @db.VarChar(20)
+  ObjectID            String    @db.VarChar(70)
+  ParentObjectID      String?   @db.VarChar(70)
+  TerritoryId         String?   @db.VarChar(10)
+  PartyRole           String?   @db.VarChar(10)
+  PartyRoleText       String?   @db.VarChar(255)
+  StartDate           DateTime? @db.Timestamptz(6)
+  EndDate             DateTime? @db.Timestamptz(6)
+  EntityLastChangedOn DateTime? @db.Timestamptz(6)
+  ETag                DateTime? @db.Timestamptz(6)
+
+  @@index([EmployeeID], map: "sales_territory_employee_role_EmployeeID_66980489_like")
+}
+
+model task {
+  ObjectID                        String    @id @db.VarChar(70)
+  DocumentType                    String?   @db.VarChar(10)
+  DocumentTypeText                String?   @db.VarChar(255)
+  ID                              String?   @db.VarChar(10)
+  Subject                         String?
+  Status                          String?   @db.VarChar(10)
+  StatusText                      String?   @db.VarChar(255)
+  StartDateTime                   DateTime? @db.Timestamptz(6)
+  StartDatetimeZoneCode           String?   @db.VarChar(10)
+  StartDatetimeZoneCodeText       String?   @db.VarChar(50)
+  DueDateTime                     DateTime? @db.Timestamptz(6)
+  DueDatetimeZoneCode             String?   @db.VarChar(10)
+  DueDatetimeZoneCodeText         String?   @db.VarChar(50)
+  PlannedDuration                 String?   @db.VarChar(50)
+  ActualDuration                  String?   @db.VarChar(50)
+  CompletionDateTime              DateTime? @db.Timestamptz(6)
+  MainEmployeeResponsiblePartyID  String?   @db.VarChar(50)
+  MainAccountPartyID              String?   @db.VarChar(50)
+  MainContactPartyID              String?   @db.VarChar(50)
+  ProcessorPartyID                String?   @db.VarChar(50)
+  CompletionPercent               Decimal?  @db.Decimal(5, 2)
+  Category                        String?   @db.VarChar(10)
+  CategoryText                    String?   @db.VarChar(50)
+  PriorityCode                    String?   @db.VarChar(10)
+  PriorityCodeText                String?   @db.VarChar(50)
+  SalesTerritoryID                String?   @db.VarChar(10)
+  SalesTerritoryName              String?   @db.VarChar(255)
+  SalesOrganisationID             String?   @db.VarChar(10)
+  DistributionChannelCode         String?   @db.VarChar(10)
+  DistributionChannelCodeText     String?   @db.VarChar(50)
+  DivisionCode                    String?   @db.VarChar(10)
+  DivisionCodeText                String?   @db.VarChar(50)
+  Account                         String?   @db.VarChar(255)
+  AccountUUID                     String?   @db.VarChar(50)
+  DataOriginTypeCode              String?   @db.VarChar(10)
+  DataOriginTypeCodeText          String?   @db.VarChar(50)
+  Owner                           String?   @db.VarChar(255)
+  OwnerUUID                       String?   @db.VarChar(50)
+  PrimaryContact                  String?   @db.VarChar(255)
+  PrimaryContactUUID              String?   @db.VarChar(50)
+  Processor                       String?   @db.VarChar(255)
+  ProcessorEmailURI               String?   @db.VarChar(255)
+  ProcessorPartyName              String?   @db.VarChar(255)
+  ProcessorUUID                   String?   @db.VarChar(50)
+  ReportedDateTime                DateTime? @db.Timestamptz(6)
+  UUID                            String?   @db.VarChar(50)
+  ChangedBy                       String?   @db.VarChar(255)
+  LastChangeDateTime              DateTime? @db.Timestamptz(6)
+  EntityLastChangedOn             DateTime? @db.Timestamptz(6)
+  ETag                            DateTime? @db.Timestamptz(6)
+  CreatedBySSI                    String?   @db.VarChar(255)
+  CreatedBySSIText                String?   @db.VarChar(255)
+  CloseDate_KUT                   DateTime? @db.Timestamptz(6)
+  DurkanEmailID_KUT               String?   @db.VarChar(255)
+  MyRVPHasApprovedThisRequest_KUT Boolean
+
+  @@index([ObjectID], map: "task_ObjectID_b5a2a596_like")
+}
+
+model to_do_actions {
+  id                    Int       @id @default(autoincrement())
+  TodoId                String    @db.VarChar(255)
+  TodoActionDate        DateTime? @db.Timestamptz(6)
+  ToDoActionDescription String?
+  TodoActionBy          String?   @db.VarChar(255)
+}
+
+model to_do_list {
+  TodoId                        Int       @id @default(autoincrement())
+  TodoType                      String    @db.VarChar(255)
+  TodoStatus                    String    @db.VarChar(255)
+  TodoCreatedDate               DateTime  @db.Timestamptz(6)
+  TodoNeedByDate                DateTime? @db.Timestamptz(6)
+  ToDoDescription               String?
+  ToDoCreatedBy                 String?   @db.VarChar(255)
+  ToDoNotes                     String?
+  ToDoAssignedToAccountID       String?   @db.VarChar(10)
+  ToDoAssignedToAccountLocation String?
+  ToDoAssignedToAccountPhone    String?   @db.VarChar(50)
+  ToDoAssignedToContacts        String?
+  ToDoCreatedByEmail            String?   @db.VarChar(254)
+  TodoCategory                  String?   @db.VarChar(255)
+  ToDoAssignedToAccountName     String?   @db.VarChar(255)
+  EventId                       String?
+}
+
+model dashboard_type {
+  id         Int         @id @default(autoincrement())
+  name       String?     @db.VarChar(255)
+  dashboards dashboard[]
+}
+
+model dashboard {
+  id               Int             @id @default(autoincrement())
+  name             String?         @db.VarChar(255)
+  db_slug          String?         @db.VarChar(255)
+  api_endoint      String?         @db.VarChar(255)
+  DashboardType_id Int?
+  dashboard        dashboard_type? @relation(fields: [DashboardType_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "dashboard_DashboardType_id_2c31a70d_fk_dashboard_type_id")
+
+  @@index([DashboardType_id], map: "dashboard_DashboardType_id_2c31a70d")
+}
+
+model employee_sales_budget {
+  Id                      Int     @id @default(autoincrement())
+  AE_Account_Code         String? @db.VarChar(70)
+  EmployeeID              String? @db.VarChar(70)
+  Sales_Group             String? @db.VarChar(20)
+  Territory_Manager       String? @db.VarChar(50)
+  S1EMP_NO                String? @db.VarChar(50)
+  Category                String? @db.VarChar(255)
+  Fiscal_Period           String? @db.VarChar(20)
+  Fiscal_Year             String? @db.VarChar(20)
+  Hard_Surface_Goal       String? @db.VarChar(50)
+  Soft_Surface_Goal       String? @db.VarChar(50)
+  Sales_Goal_Dollars      String? @db.VarChar(50)
+  Broadloom_Sales_Goal    String? @db.VarChar(50)
+  Tile_Sales_Goal         String? @db.VarChar(50)
+  Hard_Surface_Order_Goal String? @db.VarChar(50)
+  Soft_Surface_Order_Goal String? @db.VarChar(50)
+  Order_Goal_Dollars      String? @db.VarChar(50)
+  Broadloom_Order_Goal    String? @db.VarChar(50)
+  Tile_Order_Goal         String? @db.VarChar(50)
+  Email_address           String? @db.VarChar(254)
+}

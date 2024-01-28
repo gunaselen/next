@@ -1,0 +1,29 @@
+.tableResponsive{
+    width: 100%;
+    overflow: auto;
+    table{
+        border-collapse: collapse;
+        color: var(--Neutral-colors-Neutral-600, #303B4C);
+font-family: Poppins;
+font-size: 14px;
+font-style: normal;
+
+line-height: 14px;
+         th{
+            border-radius: 5px 5px 0px 0px;
+border: 1px solid var(--Neutral-colors-Neutral-200, #CBD1DB);
+opacity: 0.8;
+background: var(--Neutral-colors-Neutral-100, #F0F5FC);
+ /* 100% */
+ font-weight: 500;
+padding: 10px;
+         }
+         td{
+            border: 1px solid var(--Neutral-colors-Neutral-200, #CBD1DB);
+opacity: 0.5;
+background: #FFF;
+padding: 10px;
+font-size: 14px;
+         }
+    }
+}

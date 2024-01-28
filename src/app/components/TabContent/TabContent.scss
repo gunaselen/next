@@ -1,0 +1,25 @@
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    &-content {
+        border: 1px solid var(--Neutral-colors-Black, #000);
+        background: #fff;
+        color: #000;
+    
+        width: fit-content;
+        padding: 10px 22px;
+        font-family: Poppins;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 14px;
+        border-radius: 50px;
+        &.active {
+            color: var(--Neutral-colors-White, #fff);
+            background: var(--Primary-color-Primary-base, #bd3436);
+        }
+    }
+}

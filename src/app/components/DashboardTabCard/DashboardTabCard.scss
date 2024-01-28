@@ -1,0 +1,95 @@
+.dsCard{
+    border-radius: 4px;
+background: #FFF;
+box-shadow: 0px 4px 8px 1px rgba(6, 0, 0, 0.06);
+padding: 12px 12px 24px;
+max-width: 180px;
+flex: 1 1 160px;
+svg path{
+    fill: #FFF;
+}
+&-name{
+    color: var(--Neutral-colors-Neutral-600, #303B4C);
+text-align: right;
+font-family: Poppins;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+
+
+
+}
+
+&.active{
+ 
+        .dsCard-title{
+            color: #000000;
+        }
+
+        svg path{
+            fill: #000000;
+        }
+  
+}
+&-inside{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-between;
+}
+&-title{
+    color: var(--Neutral-colors-Neutral-500, #6D7785);
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 16px;
+margin-block: 6px; /* 100% */
+}
+&-count{
+    color: var(--Neutral-colors-Neutral-900, #00060F);
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 20px; /* 100% */
+}
+&-icon{
+    width: 36px;
+    height: 36px;
+    display: flex;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+}
+}
+.card{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+$colors: #C938C9, #FC923C, #3877C9, #8038C9, #BD3436, #38C938,#C9C938, #38C9C9;
+
+@for $i from 1 through length($colors) {
+  $color: nth($colors, $i);
+
+  .dsCard.active:nth-child(#{$i}) {
+    background: $color;
+   
+  }
+
+  .dsCard:not(.active):nth-child(#{$i}) .dsCard-icon {
+    background: $color;
+  }
+}
