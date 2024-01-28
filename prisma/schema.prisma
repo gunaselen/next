@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://bala_mohawk:WPA3EQ8M7KB40216$@mohawksae-database.postgres.database.azure.com:5432/mohawksae-database?schema=public"
 }
 
 model aes_full_details {
