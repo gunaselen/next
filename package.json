@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "/home/site/wwwroot/node_modules/.bin/next",
-    "startLocal" : "next start",
-    "lint": "next lint"
+    "start": "node .next/standalone/server.js",
+    "lint": "next lint",
+    "deploy": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/"
   },
   "dependencies": {
     "@prisma/client": "^5.8.1",
