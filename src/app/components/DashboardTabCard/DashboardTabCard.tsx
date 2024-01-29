@@ -9,6 +9,7 @@ import useAxiosAuth from '@/lib/hooks/useAxiosAuth';
 
 export default function DashboardTabCard(props: any) {
   const [data, setData] = useState(null);
+
   const axiosAuth = useAxiosAuth();
 
   const icons: any = {
@@ -24,25 +25,12 @@ export default function DashboardTabCard(props: any) {
   }
 
   useEffect(() => {
-
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer {{Auth_Token}}");
-
-
-
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-
     const fetchData = async () => {
-      const response = await axiosAuth.post('/get_employee_details/', requestOptions);
+      const response = await axiosAuth.post('/get_employee_details/', {});
       const data =  response.data;
       setData(data);
       console.log(data);
     };
-
     fetchData();
   }, []);
 

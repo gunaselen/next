@@ -104,7 +104,7 @@ export default function Page(props: Props) {
     </div>
 
     <div className="continer">
-      <TabContent title={"Scorecards  :"} dashboardType={props.dashboardType} />
+      <TabContent title={"Scorecards  :"} dashboardType={props.dashboard} />
       <TabSection title={"Volume Scorecard"} >
         <div className="tab-inne">
 

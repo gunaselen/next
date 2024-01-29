@@ -8,14 +8,13 @@ export const useRefreshToken = () => {
 
   console.log(session);
   const refreshToken = async () => {
-    const res = await axios.post("/token_refresh/", {
-      refresh: session,
+    const res = await axios.post("/validate_token/",{}, {
       headers: { 
-        'Authorization': `Bearer ${session?.user}`
+        'Authorization': `${session?.user?.account?.access_token}`
       },
     });
 
-    if (session) session.user = res.data;
+    if (session) session.user.refreshToken = res.data;
     else signIn();
   };
   return refreshToken;
