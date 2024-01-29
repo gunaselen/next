@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useRefreshToken } from "./useRefreshToken";
 
 const useAxiosAuth = () => {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession() as any;
   const refreshToken = useRefreshToken();
 
 

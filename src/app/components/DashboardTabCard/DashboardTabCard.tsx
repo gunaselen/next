@@ -4,11 +4,16 @@ import "./DashboardTabCard.scss"
 import Image from 'next/image'
 import { ApptsIcon, CustomersIcon, LeadsIcon, OpportunitiesIcon, OrdersIcon, ProfileIMg, ProjectsIcon, QuotesIcon, TaskIcon } from "@/utils/images";
 import useAxiosAuth from '@/lib/hooks/useAxiosAuth';
+import { useSession } from "next-auth/react";
 
 
 
 export default function DashboardTabCard(props: any) {
   const [data, setData] = useState(null);
+
+  const { data: session, status } = useSession();
+
+    
 
   const axiosAuth = useAxiosAuth();
 
@@ -25,14 +30,22 @@ export default function DashboardTabCard(props: any) {
   }
 
   useEffect(() => {
+    console.log(session,status);
+
     const fetchData = async () => {
       const response = await axiosAuth.post('/get_employee_details/', {});
       const data =  response.data;
       setData(data);
       console.log(data);
     };
-    fetchData();
-  }, []);
+
+    if (status === "authenticated" && session) {
+        if (session) {
+          fetchData();
+        }
+    }
+}, [session, status]);
+
 
   const { content, dashboard } = props
   return (

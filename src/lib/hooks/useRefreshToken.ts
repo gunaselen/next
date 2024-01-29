@@ -4,7 +4,7 @@ import axios from "@/lib/axios";
 import { signIn, useSession } from "next-auth/react";
 
 export const useRefreshToken = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession() as any;
 
   console.log(session);
   const refreshToken = async () => {
